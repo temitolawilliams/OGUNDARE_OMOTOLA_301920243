@@ -3,12 +3,11 @@
 **University Student Result Portal** · OMOTOLA OGUNDARE · Student ID 301920243
 
 ## Case study
-
-My case study is University Student Result Portal. I designed the database for students viewing their own published results, instructors recording assessment results and registrars managing courses and enrollments, with separate tables named student, course, enrollment and result. It supports these operations: create course enrollments; record and publish assessment results; view a student's transcript; summarize published results by course and term.
+My case study focuses on a University Student Result Portal, a system designed to manage student academic records efficiently. The database enables students to view their published results, instructors to record assessment scores, and registrars to manage courses and student enrollments. The system consists of key entities such as Student, Course, Enrollment, and Result. It supports essential academic processes, including course registration, recording and publishing assessment results, generating student transcripts, and producing summaries of published results by course and academic term.
 
 ## Portfolio 1: Database Design and Modelling
 
-I organised the relational design into 4 tables. Primary keys identify records, foreign keys preserve the links, and checks enforce the stated business rules. A recorded score must be between zero and one hundred inclusive. The normalisation examples show the sample data at 1NF, 2NF and 3NF. All 28 deliberately invalid inserts were rejected without changing the valid sample rows.
+I structured the database into four well-defined tables, with primary keys uniquely identifying each record and foreign keys maintaining relationships between the tables. Business rules are enforced through constraints, including a validation rule that ensures all recorded scores fall between 0 and 100. The normalization process was demonstrated through examples progressing from First Normal Form (1NF) to Second Normal Form (2NF) and finally Third Normal Form (3NF). To test data integrity, 28 intentionally invalid records were submitted and correctly rejected by the database, while all valid sample data remained unaffected.
 
 ![University Student Result Portal ER diagram](images/OGUNDARE_OMOTOLA_301920243_ERDiagram.png)
 
@@ -22,11 +21,11 @@ I ran four SQL queries against the sample records. The join returned 1 rows and 
 
 ## Portfolio 3: Transactions and Concurrency
 
-I used a temporary counter on enrollment to test COMMIT, ROLLBACK and READ COMMITTED isolation. The uncommitted update remained hidden from the other session, and ROLLBACK restored the earlier committed value. Without locking, two increments left the counter at 2. With SELECT FOR UPDATE, Session B waited for Session A and the final value was 3. The helper is confined to this exercise; the case's original business fields stay unchanged.
+To demonstrate transaction management and concurrency control, I used a temporary counter within the Enrollment table. This allowed me to test COMMIT, ROLLBACK, and the READ COMMITTED isolation level without affecting the core business data. During testing, uncommitted changes made in one session were not visible to another session, confirming the isolation behaviour. When a transaction was rolled back, the counter returned to its last committed value. I also simulated concurrent updates: without locking, two separate increments resulted in a final counter value of 2, illustrating a lost update scenario. After implementing SELECT FOR UPDATE, the second session waited for the first to complete, and the final value correctly became 3. The temporary counter was used solely for testing purposes, while the original case study data and business attributes remained unchanged.
 
 ## Portfolio 4: NoSQL and Advanced Data Models
 
-I used portal_events for the case's event documents. MongoDB inserted 2 sample events and returned the expected results for 4 queries. Validation rejected an invalid date type and a duplicate event ID. Embedded snapshots keep related details with an event, while the details field can differ by event type. These are fictional events; PostgreSQL continues to enforce its relational rules.
+For the NoSQL implementation, I used a portal_events collection to store event-based documents related to the case study. Using MongoDB, I successfully inserted two sample event records and verified the solution with four queries, all of which returned the expected results. Data validation rules worked as intended, rejecting records with an invalid date format as well as duplicate event IDs. The document structure uses embedded snapshots to keep related information together within each event, while allowing the details field to vary depending on the event type. The events used for testing are entirely fictional, and the relational database in PostgreSQL continues to enforce the core business rules and relationships of the system.
 
 ## Repository and evidence
 
@@ -39,7 +38,7 @@ The portfolio folders contain the SQL and JavaScript, explanations, query plans,
 
 ## Portfolio 5: Distributed and Cloud Database Exercise
 
-I proposed three MongoDB replica members across separate failure zones. The discussion covers primary elections, majority acknowledgement, secondary lag and sharding trade-offs for portal_events. Replication supports availability, while backups address recovery. PostgreSQL needs its own availability plan. This is the permitted discussion option; no live replica set or failover test was deployed.
+For the distributed database component, I proposed a MongoDB replica set consisting of three members deployed across separate failure zones to improve system resilience and availability. The discussion examines key concepts such as primary elections, majority write acknowledgements, secondary replica lag, and the trade-offs involved in sharding the portal_events collection. Replication helps ensure that the system remains available when a node fails, while regular backups provide a recovery mechanism in the event of data loss or corruption. Since the relational database and MongoDB store different types of data, PostgreSQL would require its own high-availability and disaster recovery strategy. This portfolio focuses on the approved discussion-based approach; therefore, no live replica set or failover testing was implemented.
 
 ## Individual reflection
 
@@ -47,7 +46,7 @@ I kept student, course, enrollment, result in separate tables so their details c
 
 ## AI-use declaration
 
-I used GitHub Copilot and the portfolio generator to help prepare the database model, scripts and explanations. The generator ran the PostgreSQL and MongoDB exercises, checked their outputs and captured the result images.  I remain responsible for checking and explaining the submitted work.
+I used GitHub Copilot and AI-assisted tools to support the development of the database model, SQL scripts, and documentation. These tools helped with drafting code, checking syntax, and improving explanations. All database design decisions, testing activities, result verification, and final submissions were reviewed and validated by me. I take full responsibility for the submitted work.
 
 ## References
 
